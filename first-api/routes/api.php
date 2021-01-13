@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::get('/test', function(Request $request){
 
 //Products Route
 
-Route::get('/products', function() {
-    return \App\Models\Product::all();
+
+Route::namespace('Api')->prefix('products')->group(function(){
+
+	Route::get('/', [ProductController::class, 'index']);
 });

@@ -39,4 +39,10 @@ class ProductController extends Controller
         $product->update($data);
         return response()->json($product);
     }
+
+    public function delete($id) {
+        $product = $this->product->find($id);
+        $product->delete();
+        return response()->json(['data' => ['msg' => 'Produto foi removido com sucesso!']]);
+    }
 }

@@ -39,4 +39,5 @@ Route::namespace('Api')->prefix('products')->group(function(){
 	Route::post('/', [ProductController::class, 'save']);
 	Route::put('/', [ProductController::class, 'update']);
 	Route::patch('/', [ProductController::class, 'update']);
+	Route::delete('/{id}', [ProductController::class, 'delete']);
 });

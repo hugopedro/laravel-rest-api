@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +33,18 @@ Route::get('/test', function(Request $request){
 //Products Route
 
 
-Route::namespace('Api')->prefix('products')->group(function(){
+Route::namespace('Api')->group(function(){
 
-	Route::get('/', [ProductController::class, 'index']);
-	Route::get('/{id}', [ProductController::class, 'show']);
-	Route::post('/', [ProductController::class, 'save']);
-	Route::put('/', [ProductController::class, 'update']);
-	Route::patch('/', [ProductController::class, 'update']);
-	Route::delete('/{id}', [ProductController::class, 'delete']);
+    //Rota de produtos
+
+    Route::prefix('products')->group(function() {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/{id}', [ProductController::class, 'show']);
+        Route::post('/', [ProductController::class, 'save']);
+        Route::put('/', [ProductController::class, 'update']);
+        Route::patch('/', [ProductController::class, 'update']);
+        Route::delete('/{id}', [ProductController::class, 'delete']);
+    });
+
 });
+Route::resource('/users', UserController::class);

@@ -21,4 +21,15 @@ class ProductController extends Controller
         $products = $this->product->all();
         return response()->json($products);
     }
+
+    public function show($id) {
+        $product = $this->product->find($id);
+        return response()->json($product);
+    }
+
+    public function save(Request $request) {
+        $data = $request->all();
+        $product = $this->product->create($data);
+        return response()->json($product);
+    }
 }

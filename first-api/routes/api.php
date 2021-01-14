@@ -35,4 +35,6 @@ Route::get('/test', function(Request $request){
 Route::namespace('Api')->prefix('products')->group(function(){
 
 	Route::get('/', [ProductController::class, 'index']);
+	Route::get('/{id}', [ProductController::class, 'show']);
+	Route::post('/', [ProductController::class, 'save']);
 });

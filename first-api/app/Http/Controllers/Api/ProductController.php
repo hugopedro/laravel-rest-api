@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductCollection;
+use App\Repository\ProductRepository;
 
 class ProductController extends Controller
 {
@@ -22,21 +23,18 @@ class ProductController extends Controller
     public function index(Request $request) {
 
         $products = $this->product;
-
+        $productRepository = new ProductRepository($products);
         if ($request->has('conditions')) {
-            $expressions = explode(';', $request->get('conditions'));
-            foreach($expressions as $e) {
-                $exp = explode(':', $e);
-                $products = $products->where($exp[0], $exp[1], $exp[2]);
-            };
+            $productRepository->selectConditions($request->get('conditions'));
         }
+
 
         if($request->has('fields')) {
-            $fields = $request->get('fields'); // verifica se os campo estão chegando.
-            $products = $products->selectRaw($fields);
+            $productRepository->selectFilter($request->get('fields'));
+
         }
 
-        return new ProductCollection($products->paginate(10));
+        return new ProductCollection($productRepository->getResult()->paginate(10));
     }
 
     public function show($id) {

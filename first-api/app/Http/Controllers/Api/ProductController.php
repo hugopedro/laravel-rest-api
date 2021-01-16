@@ -19,10 +19,15 @@ class ProductController extends Controller
         $this->product = $product;
     }
 
-    public function index() {
-        $products = $this->product->paginate(1);
-        // return response()->json($products);
-        return new ProductCollection($products);
+    public function index(Request $request) {
+
+        $products = $this->product;
+
+        if($request->has('fields')) {
+            $fields = $request->get('fields'); // verifica se os campo estão chegando.
+            $products = $products->selectRaw($fields);
+        }
+        return new ProductCollection($products->paginate(10));
     }
 
     public function show($id) {

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,24 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function(Request $request){
+Route::get('/test', function (Request $request) {
     //dd($request->headers->all());
-	//dd($request->headers->get('Authorization'));
+    //dd($request->headers->get('Authorization'));
 
-	$response = new \Illuminate\Http\Response(json_encode(['msg' => 'Minha primeira resposta de API']));
-	$response->header('Content-Type', 'application/json');
+    $response = new \Illuminate\Http\Response(json_encode(['msg' => 'Minha primeira resposta de API']));
+    $response->header('Content-Type', 'application/json');
 
-	return $response;
+    return $response;
 });
 
 //Products Route
 
-
-Route::namespace('Api')->group(function(){
-
+Route::namespace('Api')->group(function () {
     //Rota de produtos
 
-    Route::prefix('products')->group(function() {
+    Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index']);
         Route::get('/{id}', [ProductController::class, 'show']);
         Route::post('/', [ProductController::class, 'save'])->middleware('auth.basic');
@@ -45,6 +43,5 @@ Route::namespace('Api')->group(function(){
         Route::patch('/', [ProductController::class, 'update']);
         Route::delete('/{id}', [ProductController::class, 'delete']);
     });
-
 });
 Route::resource('/users', UserController::class);

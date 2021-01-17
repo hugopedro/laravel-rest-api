@@ -13,6 +13,7 @@ class CreateTableRealState extends Migration
     {
         Schema::create('real_state', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('description');
             $table->text('content');
@@ -23,6 +24,7 @@ class CreateTableRealState extends Migration
             $table->integer('total_property_area');
             $table->string('slug');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

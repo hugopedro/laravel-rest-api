@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\RealState;
+use Illuminate\Http\Request;
 
 class RealStateController extends Controller
 {
@@ -19,5 +20,10 @@ class RealStateController extends Controller
         $realState = $this->realState->paginate('10');
 
         return response()->json($realState, 200);
+    }
+
+    public function store(Request $request)
+    {
+        return response()->json($request->all(), 200);
     }
 }

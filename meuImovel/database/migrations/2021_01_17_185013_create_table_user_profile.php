@@ -8,21 +8,21 @@ class CreateTableUserProfile extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('user_profile', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->text('about')->nullable(true);
+            $table->text('social_networks')->nullable(true);
+            $table->string('phone');
+            $table->string('mobile_phone');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

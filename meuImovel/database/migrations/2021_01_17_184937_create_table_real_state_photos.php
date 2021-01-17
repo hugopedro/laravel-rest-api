@@ -8,21 +8,19 @@ class CreateTableRealStatePhotos extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('real_state_photos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('photo');
+            $table->boolean('is_thumb');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

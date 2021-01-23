@@ -47,7 +47,7 @@ class UserController extends Controller
         Validator::make($data, [
             'phone' => 'required',
             'mobile_phone' => 'required',
-        ]);
+        ])->validate();
 
         try {
             $data['password'] = bcrypt($data['password']);
